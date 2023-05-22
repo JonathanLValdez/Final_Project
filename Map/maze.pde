@@ -1,6 +1,6 @@
 import processing.core.PApplet;
-
-public class WorldsHardestGame extends PApplet {
+//Game Setup
+public class Game extends PApplet {
   // Game Constants
   private static final int WINDOW_WIDTH = 800;
   private static final int WINDOW_HEIGHT = 600;
@@ -10,23 +10,19 @@ public class WorldsHardestGame extends PApplet {
   private int redSquareX;
   private int redSquareY;
 
-  public static void main(String[] args) {
-    PApplet.main("WorldsHardestGame");
-  }
 
-  @Override
+
   public void settings() {
     size(WINDOW_WIDTH, WINDOW_HEIGHT);
   }
 
-  @Override
+
   public void setup() {
     // Set up the initial position of the red square
     redSquareX = width / 2;
     redSquareY = height / 2;
   }
 
-  @Override
   public void draw() {
     background(255);
     drawRedSquare();
@@ -37,19 +33,22 @@ public class WorldsHardestGame extends PApplet {
     rect(redSquareX, redSquareY, SQUARE_SIZE, SQUARE_SIZE);
   }
 
-  @Override
+//move in diff class
   public void keyPressed() {
-    if (keyCode == UP || key == 'w' || key == 'W') {
-      moveRedSquare(0, -SQUARE_SIZE);
-    } else if (keyCode == DOWN || key == 's' || key == 'S') {
-      moveRedSquare(0, SQUARE_SIZE);
-    } else if (keyCode == LEFT || key == 'a' || key == 'A') {
-      moveRedSquare(-SQUARE_SIZE, 0);
-    } else if (keyCode == RIGHT || key == 'd' || key == 'D') {
-      moveRedSquare(SQUARE_SIZE, 0);
+    if (key == CODED) {
+      if (keyCode == UP || key == 'w' || key == 'W') {
+        moveRedSquare(0, -SQUARE_SIZE);
+      } else if (keyCode == DOWN || key == 's' || key == 'S') {
+        moveRedSquare(0, SQUARE_SIZE);
+      } else if (keyCode == LEFT || key == 'a' || key == 'A') {
+        moveRedSquare(-SQUARE_SIZE, 0);
+      } else if (keyCode == RIGHT || key == 'd' || key == 'D') {
+        moveRedSquare(SQUARE_SIZE, 0);
+      }
     }
   }
 
+//Character Redsquare class
   private void moveRedSquare(int deltaX, int deltaY) {
     int nextX = redSquareX + deltaX;
     int nextY = redSquareY + deltaY;
