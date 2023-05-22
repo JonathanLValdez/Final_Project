@@ -39,16 +39,14 @@ public class WorldsHardestGame extends PApplet {
 
   @Override
   public void keyPressed() {
-    if (key == CODED) {
-      if (keyCode == UP || key == 'w' || key == 'W') {
-        moveRedSquare(0, -SQUARE_SIZE);
-      } else if (keyCode == DOWN || key == 's' || key == 'S') {
-        moveRedSquare(0, SQUARE_SIZE);
-      } else if (keyCode == LEFT || key == 'a' || key == 'A') {
-        moveRedSquare(-SQUARE_SIZE, 0);
-      } else if (keyCode == RIGHT || key == 'd' || key == 'D') {
-        moveRedSquare(SQUARE_SIZE, 0);
-      }
+    if (keyCode == UP || key == 'w' || key == 'W') {
+      moveRedSquare(0, -SQUARE_SIZE);
+    } else if (keyCode == DOWN || key == 's' || key == 'S') {
+      moveRedSquare(0, SQUARE_SIZE);
+    } else if (keyCode == LEFT || key == 'a' || key == 'A') {
+      moveRedSquare(-SQUARE_SIZE, 0);
+    } else if (keyCode == RIGHT || key == 'd' || key == 'D') {
+      moveRedSquare(SQUARE_SIZE, 0);
     }
   }
 
