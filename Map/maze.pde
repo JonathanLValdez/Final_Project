@@ -33,7 +33,7 @@ public class Game extends PApplet {
     rect(redSquareX, redSquareY, SQUARE_SIZE, SQUARE_SIZE);
   }
 
-//move in diff class
+//move in player class
   public void keyPressed() {
     if (key == CODED) {
       if (keyCode == UP || key == 'w' || key == 'W') {
