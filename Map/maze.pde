@@ -10,8 +10,6 @@ import processing.core.PApplet;
   private int redSquareX;
   private int redSquareY;
 
-
-
   public void settings() {
     size(WINDOW_WIDTH, WINDOW_HEIGHT);
   }
@@ -60,3 +58,4 @@ import processing.core.PApplet;
     }
   }
 }
+
