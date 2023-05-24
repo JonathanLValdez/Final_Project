@@ -22,7 +22,7 @@ import processing.core.PApplet;
   }
 
   public void draw() {
-    background(255);
+    background(173,216,255);
     drawRedSquare();
   }
 
@@ -45,7 +45,6 @@ import processing.core.PApplet;
       }
     }
   }
-
 //Character Redsquare class
   private void moveRedSquare(int deltaX, int deltaY) {
     int nextX = redSquareX + deltaX;
@@ -57,5 +56,6 @@ import processing.core.PApplet;
       redSquareY = nextY;
     }
   }
-}
+
+
 
