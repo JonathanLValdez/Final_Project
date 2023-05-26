@@ -1,5 +1,3 @@
-import processing.core.PApplet;
-import processing.core.PFont;
 
   private static final int WINDOW_WIDTH = 800;
   private static final int WINDOW_HEIGHT = 600;
@@ -54,34 +52,3 @@ import processing.core.PFont;
       println("Load levels button clicked!");
     }
   }
-
-  class Button {
-    private int x, y;
-    private int width, height;
-    private String label;
-
-    public Button(int x, int y, int width, int height, String label) {
-      this.x = x;
-      this.y = y;
-      this.width = width;
-      this.height = height;
-      this.label = label;
-    }
-
-    public void display() {
-      stroke(0);
-      fill(255);
-      rect(x, y, width, height);
-      fill(0);
-      textSize(32);
-      textAlign(CENTER, CENTER);
-      text(label, x + width / 2, y + height / 2);
-    }
-
-    public boolean isMouseOver() {
-      return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
-    }
-  }
-
-}
-
