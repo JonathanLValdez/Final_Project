@@ -50,3 +50,4 @@ public class Coin {
         this.collected = collected;
     }
 }
+
