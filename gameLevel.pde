@@ -67,17 +67,23 @@ public class GameLevel {
     return this.levelTitle;
   }
 
+  /** Draw the tiles based on a text file in the maps package.
+   *
+   *
+   */
   public void drawTiles(Graphics g) {
 
     Graphics2D g2 = (Graphics2D) g;
 
     try {
-      for (Tile t : this.tileMap) {
+      /*for (Tile t : this.tileMap) {
         //Background
         if (t.getType() == 0) {
           g.setColor(new Color(180, 181, 254));
           g.fillRect(t.getX(), t.getY(), 40, 40);
         }
+      }*/
+
       g.setColor(new Color(180, 181, 254));
       g.fillRect(0, 22, 800, 622);
 
