@@ -1,3 +1,9 @@
+import processing.core.PApplet;
+import processing.core.PConstants;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
 
     private static Game game;
     private Timer timer;
@@ -18,6 +24,9 @@
         timer.start();
     }
 
+    public void settings (){ 
+       size (800,800);
+}
 
     public void actionPerformed(ActionEvent e) {
         update();
