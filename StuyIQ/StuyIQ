@@ -1,0 +1,94 @@
+final int MENU_STATE = 0;
+final int PLAY_STATE = 1;
+final int GAMEOVER_STATE = 2;
+
+final int WINDOW_WIDTH = 800;
+final int WINDOW_HEIGHT = 600;
+final int BORDER_SIZE = 20;
+final int COIN_SIZE = 10;
+final int OBSTACLE_SIZE = 8;
+final int TILE_SIZE = 100;
+final int NUM_TILES_X = (WINDOW_WIDTH - 2 * BORDER_SIZE) / TILE_SIZE;
+final int NUM_TILES_Y = (WINDOW_HEIGHT - 2 * BORDER_SIZE) / TILE_SIZE;
+int state = MENU_STATE;
+int score = 0;
+
+void setup() {
+  size(800, 600);
+  background(135, 206, 235); // Sky blue color
+}
+
+void draw() {
+  switch (state) {
+    case MENU_STATE:
+      drawMenu();
+      break;
+    case PLAY_STATE:
+      drawGame();
+      drawPlayer();
+      break;
+    case GAMEOVER_STATE:
+      // drawGameOver();
+      break;
+  }
+}
+
+void keyPressed() {
+  if (state == MENU_STATE && key == ' ') {
+    state = PLAY_STATE;
+    score = 0;
+    levelOneSetup();
+  } else if (state == GAMEOVER_STATE && key == ' ') {
+    state = MENU_STATE;
+  }
+  
+  if (state == PLAY_STATE) {
+    if (isLevelStarting) {
+      if (keyCode == LEFT) {
+        playerX -= PLAYER_SIZE;
+      } else if (keyCode == RIGHT) {
+        playerX += PLAYER_SIZE;
+      } else if (keyCode == UP) {
+        playerY -= PLAYER_SIZE;
+      } else if (keyCode == DOWN) {
+        playerY += PLAYER_SIZE;
+      }
+    }
+  }
+}
+
+void drawMenu() {
+  background(135, 206, 235); // Sky blue color
+  textAlign(CENTER, CENTER);
+  fill(255);
+  textSize(30);
+  text("Test Your StuyIQ", width / 2, height / 2 - 50);
+  textSize(20);
+  text("Press Space to Play", width / 2, height / 2 + 50);
+}
+
+void drawBorders() {
+  noFill();
+  stroke(0);
+  strokeWeight(BORDER_SIZE);
+  rect(BORDER_SIZE / 2, BORDER_SIZE / 2, width - BORDER_SIZE, height - BORDER_SIZE);
+}
+
+void drawGame() {
+  background(135, 206, 235); // Sky blue color
+  drawBorders();
+  drawBoxes();
+  drawCoins();
+  // Implement game mechanics (movement, collision detection) for Level 1
+}
+
+/*
+void drawGameOver() {
+  background(135, 206, 235); // Sky blue color
+  textAlign(CENTER, CENTER);
+  fill(255);
+  textSize(30);
+  text("You will definitely pay next...", width / 2, height / 2);
+  textSize(20);
+  text("Press Space to Restart", width / 2, height / 2 + 50);
+}*/
