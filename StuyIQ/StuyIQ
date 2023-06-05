@@ -25,7 +25,7 @@ void draw() {
       break;
     case PLAY_STATE:
       drawGame();
-      drawPlayer();
+      spawnRedPlayer();
       break;
     case GAMEOVER_STATE:
       // drawGameOver();
