@@ -25,3 +25,13 @@ void drawCoins() {
     ellipse(coin.x, coin.y, COIN_SIZE, COIN_SIZE);
   }
 }
+
+void checkCoinCollision(){
+  for (int i = coins.size()-1; i<=0; i--){
+    Coin coin = coins.get(i);
+    if (playerX == coin.x && playerY == coin.y) {
+      coins.remove(i);
+      score++;
+    }
+  }
+}
