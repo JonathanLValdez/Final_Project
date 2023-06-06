@@ -6,7 +6,8 @@ boolean blueDotsMovingLeft; // Flag to track the direction of blue dots movement
 void levelOneSetup() {
   // Initialize the tiles array
   tiles = new int[NUM_TILES_X][NUM_TILES_Y];
-  
+  // Create obstacles for level one
+  createObstacles();
   // Set the pattern of tiles (white color) inside the borders
   for (int i = 1; i < NUM_TILES_X - 1; i++) {
     for (int j = 1; j < NUM_TILES_Y - 1; j++) {
