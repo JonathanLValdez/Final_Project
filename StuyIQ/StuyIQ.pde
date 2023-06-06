@@ -105,7 +105,7 @@ void drawGame() {
   textFont(createFont("Times New Roman", 24));
   text("Score: " + score, 10, 10);
   text("Death Count: " + deathCount, 10, 40);
-  
+  checkCoinCollision();
  // Check for collision between player and obstacles
   for (Obstacle obstacle : obstacles) {
     float distance = dist(playerX, playerY, obstacle.x, obstacle.y);
@@ -116,25 +116,27 @@ void drawGame() {
       coins.clear();
       score = 0;
       deathCount++;
-      break; // Exit the loop since the collision has been handled
+      break;// Exit the loop since the collision has been handled
     }
   }
-
+/*
 // Check for collision between player and coins
 for (int i = coins.size() - 1; i >= 0; i--) {
   Coin coin = coins.get(i);
+  
 
   // Calculate the distance between the player's center and the coin's center
   float distance = dist(playerX + PLAYER_SIZE / 2, playerY + PLAYER_SIZE / 2, coin.x, coin.y);
 
   // Check if the distance is less than or equal to the sum of half the player's size and half the coin's size
-  if (distance <= (PLAYER_SIZE + COIN_SIZE) / 2) {
+  if (distance <= (PLAYER_SIZE + COIN_SIZE) ) {
     // Collision occurred, remove the coin and increment score
     coins.remove(i);
     score++;
     break; // Exit the loop since the collision has been handled
   }
 }
+*/
 }
 void drawBoxes() {
   fill(0, 255, 0); // Green color for the boxes
