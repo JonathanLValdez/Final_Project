@@ -1,13 +1,20 @@
-
 int[][] tiles; // Array to store the tile pattern
 int[][] blueDots; // Array to store the blue dots positions
 boolean blueDotsMovingLeft; // Flag to track the direction of blue dots movement
 
 void levelOneSetup() {
+  // Spawn 4 yellow coins in the middle of the entire background
+  coins.add(new Coin(centerX - COIN_SIZE, centerY - COIN_SIZE));
+  coins.add(new Coin(centerX + COIN_SIZE, centerY - COIN_SIZE));
+  coins.add(new Coin(centerX - COIN_SIZE, centerY + COIN_SIZE));
+  coins.add(new Coin(centerX + COIN_SIZE, centerY + COIN_SIZE));
+  
   // Initialize the tiles array
   tiles = new int[NUM_TILES_X][NUM_TILES_Y];
+  
   // Create obstacles for level one
   createObstacles();
+  
   // Set the pattern of tiles (white color) inside the borders
   for (int i = 1; i < NUM_TILES_X - 1; i++) {
     for (int j = 1; j < NUM_TILES_Y - 1; j++) {
