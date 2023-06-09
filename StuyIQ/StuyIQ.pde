@@ -13,14 +13,15 @@ final int NUM_TILES_X = (WINDOW_WIDTH - 2 * BORDER_SIZE) / TILE_SIZE;
 final int NUM_TILES_Y = (WINDOW_HEIGHT - 2 * BORDER_SIZE) / TILE_SIZE;
 int state = MENU_STATE;
 int score = 0;
-int deathCount = 0;
-
+int deathCount = -1;
+int centerX = (NUM_TILES_X / 2) * TILE_SIZE;
+int centerY = (NUM_TILES_Y / 2) * TILE_SIZE;
 boolean isLevelStarting = true; // Flag to track if the level is starting
+
 
 void setup() {
   size(800, 600);
   background(135, 206, 235); // Sky blue color
-  
 // Set initial player position
 playerX = BORDER_SIZE + OBSTACLE_SIZE + (BOX_SIZE - PLAYER_SIZE) / 2;
 playerY = WINDOW_HEIGHT - BORDER_SIZE - BOX_SIZE + (BOX_SIZE - PLAYER_SIZE) / 2;
@@ -34,9 +35,6 @@ void draw() {
     case PLAY_STATE:
       drawGame();
       drawPlayer();
-      break;
-    case GAMEOVER_STATE:
-      // drawGameOver();
       break;
   }
 }
@@ -92,6 +90,16 @@ void drawBorders() {
   rect(BORDER_SIZE / 2, BORDER_SIZE / 2, width - BORDER_SIZE, height - BORDER_SIZE);
 }
 
+void drawBoxes() {
+  fill(0, 255, 0); // Green color for the boxes
+  
+  // Draw box in the bottom left
+  rect(BORDER_SIZE, WINDOW_HEIGHT - BORDER_SIZE - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+  
+  // Draw box in the top right
+  rect(WINDOW_WIDTH - BORDER_SIZE - BOX_SIZE, BORDER_SIZE, BOX_SIZE, BOX_SIZE);
+}
+
 void drawGame() {
   background(135, 206, 235); // Sky blue color
   drawBorders();
@@ -105,55 +113,52 @@ void drawGame() {
   textFont(createFont("Times New Roman", 24));
   text("Score: " + score, 10, 10);
   text("Death Count: " + deathCount, 10, 40);
-  checkCoinCollision();
- // Check for collision between player and obstacles
+  
+  // Check for collision between player and obstacles
   for (Obstacle obstacle : obstacles) {
     float distance = dist(playerX, playerY, obstacle.x, obstacle.y);
     if (distance <= OBSTACLE_SIZE / 2) {
       // Collision occurred with an obstacle, reset player position, score, and update death count
       playerX = BORDER_SIZE + OBSTACLE_SIZE + (BOX_SIZE - PLAYER_SIZE) / 2;
       playerY = WINDOW_HEIGHT - BORDER_SIZE - BOX_SIZE + (BOX_SIZE - PLAYER_SIZE) / 2;
-      coins.clear();
+      coins.clear(); // Clear the coins ArrayList
+      respawnCoins(); // Respawn the coins
       score = 0;
       deathCount++;
-      break;// Exit the loop since the collision has been handled
+      break; // Exit the loop since the collision has been handled
     }
   }
-/*
-// Check for collision between player and coins
-for (int i = coins.size() - 1; i >= 0; i--) {
-  Coin coin = coins.get(i);
   
-
-  // Calculate the distance between the player's center and the coin's center
-  float distance = dist(playerX + PLAYER_SIZE / 2, playerY + PLAYER_SIZE / 2, coin.x, coin.y);
-
-  // Check if the distance is less than or equal to the sum of half the player's size and half the coin's size
-  if (distance <= (PLAYER_SIZE + COIN_SIZE) ) {
-    // Collision occurred, remove the coin and increment score
-    coins.remove(i);
-    score++;
-    break; // Exit the loop since the collision has been handled
+    if (playerX + PLAYER_SIZE >= WINDOW_WIDTH - BORDER_SIZE - BOX_SIZE &&
+      playerX <= WINDOW_WIDTH - BORDER_SIZE &&
+      playerY + PLAYER_SIZE >= BORDER_SIZE &&
+      playerY <= BORDER_SIZE + BOX_SIZE) {
+  levelOneSetup(); // Reset the level
+  }
+  
+  // Check for collision between player and coins
+  for (int i = coins.size() - 1; i >= 0; i--) {
+    Coin coin = coins.get(i);
+  
+    // Calculate the distance between the player's center and the coin's center
+    float distance = dist(playerX + PLAYER_SIZE / 2, playerY + PLAYER_SIZE / 2, coin.x, coin.y);
+  
+    // Check if the distance is less than or equal to the sum of half the player's size and half the coin's size
+    if (distance <= (PLAYER_SIZE + COIN_SIZE) / 2) {
+      // Collision occurred, remove the coin and increment score
+      coins.remove(i);
+      score++;
+      break; // Exit the loop since the collision has been handled
+    }
   }
 }
-*/
-}
-void drawBoxes() {
-  fill(0, 255, 0); // Green color for the boxes
-  
-  // Draw box in the bottom left
-  rect(BORDER_SIZE, WINDOW_HEIGHT - BORDER_SIZE - BOX_SIZE, BOX_SIZE, BOX_SIZE);
-  
-  // Draw box in the top right
-  rect(WINDOW_WIDTH - BORDER_SIZE - BOX_SIZE, BORDER_SIZE, BOX_SIZE, BOX_SIZE);
+
+void respawnCoins() {
+  // Spawn 4 yellow coins in the middle of the entire background
+  coins.add(new Coin(centerX - COIN_SIZE, centerY - COIN_SIZE));
+  coins.add(new Coin(centerX + COIN_SIZE, centerY - COIN_SIZE));
+  coins.add(new Coin(centerX - COIN_SIZE, centerY + COIN_SIZE));
+  coins.add(new Coin(centerX + COIN_SIZE, centerY + COIN_SIZE));
 }
 
-void drawGameOver() {
-  background(135, 206, 235); // Sky blue color
-  textAlign(CENTER, CENTER);
-  fill(255);
-  textSize(30);
-  text("You will definitely pay next...", width / 2, height / 2);
-  textSize(20);
-  text("Press Space to Restart", width / 2, height / 2 + 50);
-}
+
